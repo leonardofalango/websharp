@@ -1,10 +1,12 @@
 using backend.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace backend.Controllers;
 
 [ApiController]
 [Route("News")]
+[EnableCors("MainPolicy")]
 public class NewsController : ControllerBase
 {
     private WebSharpContext entity;
@@ -47,7 +49,8 @@ public class NewsController : ControllerBase
                 City = c.CityName,
                 State = s.StateName,
                 Country = country.CountryName,
-                Date = n.NewsDate
+                Date = n.NewsDate,
+                Topics = new string[]{"1", "2", "3"}
             };
         return query.FirstOrDefault(e => e.Id == news.Id)!;
     }
@@ -61,6 +64,7 @@ public class NewsController : ControllerBase
         public string? State { get; set; }
         public string? Country { get; set; }
         public DateTime? Date { get; set; }
+        public string[]? Topics { get; set; }
     }
     
 }

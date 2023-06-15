@@ -1,0 +1,25 @@
+<table>
+    <thead>
+        <th>Noticia Id</th>
+        <th>Titulo</th>
+        <th>ThumbNail</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+        <th>País</th>
+        <th>Data</th>
+        <th>Topicos</th>
+        <th>Conteudo</th>
+    </thead>
+
+    <tr *ngFor="let news of data">
+        <td>{{news.id}}</td>
+        <td>{{news.title}}</td>
+        <td>{{news.thumbnail}}</td>
+        <td>{{news.city}}</td>
+        <td>{{news.state}}</td>
+        <td>{{news.country}}</td>
+        <td>{{news.newsDate}}</td>
+        <td>{{news.topics}}</td>
+        <td>{{news.content}}</td>
+    </tr>
+</table>

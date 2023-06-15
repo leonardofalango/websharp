@@ -6,10 +6,12 @@ namespace backend.Model;
 
 public partial class WebSharpContext : DbContext
 {
+    #pragma warning disable
     public WebSharpContext()
     {
     }
 
+    #pragma warning disable
     public WebSharpContext(DbContextOptions<WebSharpContext> options)
         : base(options)
     {
@@ -28,7 +30,8 @@ public partial class WebSharpContext : DbContext
     public virtual DbSet<TopicsXnews> TopicsXnews { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=CTPC3622;Initial Catalog=WebSharp;Integrated Security=True;TrustServerCertificate=true");
+    #warning Trocar o Data Source e tambem o Initial Catalog
+        => optionsBuilder.UseSqlServer("Data Source=CT-C-0013K\\SQLEXPRESS01;Initial Catalog=WebSharp;Integrated Security=True;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

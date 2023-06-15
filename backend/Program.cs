@@ -4,29 +4,39 @@ using backend.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<WebSharpContext>();
+// Adding CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "MainPolicy",
+        policy =>
+        {
+            policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+        });
+});
 
-var env = builder.Environment;
+builder.Services.AddScoped<WebSharpContext>(); // Shared Context
 
-builder.Services.AddTransient<NewsController>();
+builder.Services.AddTransient<NewsController>(); // Create class every req
 
 var app = builder.Build();
 
 
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseCors();
+// app.UseSwagger(); // Swagger for debug
+// app.UseSwaggerUI(); // Swagger for debug
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
